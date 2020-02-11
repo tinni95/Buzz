@@ -20,7 +20,7 @@ export default LandingPage = ({ navigation }) => {
                     isMedium
                     textColor={Colors.primary}
                     color={Colors.primary}
-                    onPress={() => { }}
+                    onPress={() => { navigation.push('RegisterPage') }}
                     text="Iscriviti"
                 />
                 <View style={{ height: 20 }}></View>
