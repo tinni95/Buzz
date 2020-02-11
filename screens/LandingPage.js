@@ -4,7 +4,7 @@ import RoundButton from '../components/RoundButton';
 import Colors from '../constants/Colors';
 import { Light } from '../components/StyledText';
 
-export default LandingPage = () => {
+export default LandingPage = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -28,7 +28,7 @@ export default LandingPage = () => {
                     isMedium
                     textColor={Colors.secondary}
                     color={"white"}
-                    onPress={() => { }}
+                    onPress={() => { navigation.push('LoginPage') }}
                     text="Accedi"
                 />
             </View>
