@@ -4,11 +4,21 @@ import { Light } from '../components/StyledText';
 import Colors from '../constants/Colors';
 import { isSmallDevice } from '../constants/Layout';
 import BuzzTextInput from '../components/BuzzTextInput';
+import HeaderRight from '../components/HeaderRight';
 
-export default function LoginPage() {
+export default function LoginPage({ navigation }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     let input = useRef();
+    navigation.setOptions({
+        headerRight: () => (
+            <HeaderRight text={"Next"} onPress={() => login()} />
+        )
+    })
+
+    const login = () => {
+        alert("login")
+    }
 
     return (
         <View style={styles.container}>
@@ -25,6 +35,7 @@ export default function LoginPage() {
                 value={password}
                 placeholder={"password"}
                 onChangeText={text => setPassword(text)}
+                onSubmitEditing={() => login()}
             />
             <TouchableOpacity style={{ alignSelf: "flex-end", marginRight: 15 }}>
                 <Light style={{ color: Colors.secondary }}>Reset Password</Light>
