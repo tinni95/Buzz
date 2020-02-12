@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { isSmallDevice } from '../constants/Layout';
-import BuzzTextInput from '../components/BuzzTextInput';
-import HeaderRight from '../components/HeaderRight';
+import { isSmallDevice } from '../../constants/Layout';
+import BuzzTextInput from '../../components/BuzzTextInput';
+import HeaderRight from '../../components/HeaderRight';
+import { validateEmail } from "../../utils/validators"
 
-export default function RegisterPage({ navigation }) {
-    const [name, setName] = useState("")
-    const [surname, setSurname] = useState("")
-    const [nameError, setNameError] = useState(false)
-    const [surnameError, setSurnameError] = useState("")
+export default function EmailPage({ navigation }) {
+    const [email, setEmail] = useState("")
+    const [reEmail, setReEmail] = useState("")
+    const [emailError, setEmailError] = useState(false)
+    const [reEmailError, setReEmailError] = useState("")
 
     let input = useRef();
     navigation.setOptions({
@@ -18,39 +19,41 @@ export default function RegisterPage({ navigation }) {
     })
 
     const login = () => {
-        if (name.length == 0) {
-            setNameError(true)
+        if (!validateEmail(email)) {
+            setEmailError(true)
         }
         else {
-            setNameError(false)
+            setEmailError(false)
         }
-        if (surname.length == 0) {
-            setSurnameError(true)
+        if (email != reEmail) {
+            setReEmailError(true)
         }
         else {
-            setSurnameError(false)
+            setReEmailError(false)
         }
     }
 
     return (
         <View style={styles.container}>
             <BuzzTextInput
-                label='first name'
-                value={name}
-                hintError={nameError}
-                hintText={"Empty field"}
-                placeholder={"first name"}
-                onChangeText={text => setName(text)}
+                label='Email'
+                autoCapitalize="none"
+                value={email}
+                hintError={emailError}
+                hintText={"Invalid email"}
+                placeholder={"email"}
+                onChangeText={text => setEmail(text)}
                 onSubmitEditing={() => input.current.focus()}
             />
             <BuzzTextInput
                 reference={input}
-                label='last name'
-                value={surname}
-                hintError={surnameError}
-                hintText={"Empty field"}
-                placeholder={"last name"}
-                onChangeText={text => setSurname(text)}
+                label='Repeat Email'
+                value={reEmail}
+                autoCapitalize="none"
+                hintError={reEmailError}
+                hintText={"Email don't match"}
+                placeholder={"email"}
+                onChangeText={text => setReEmail(text)}
                 onSubmitEditing={() => login()}
             />
         </View>

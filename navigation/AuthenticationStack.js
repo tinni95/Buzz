@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LandingPage from '../screens/LandingPage';
 import LoginPage from '../screens/LoginPage';
 import HeaderLeft from '../components/HeaderLeft';
-import RegisterPage from '../screens/RegisterPage';
+import RegisterPage from '../screens/RegisterPage/RegisterPage';
+import EmailPage from '../screens/RegisterPage/EmailPage';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,14 @@ export const AuthenticationStack = () => {
             <Stack.Screen
                 name="RegisterPage"
                 component={RegisterPage}
+                options={({ navigation }) => ({
+                    headerTitle: "",
+                    headerLeft: () => (<HeaderLeft navigation={navigation} />)
+                })}
+            />
+            <Stack.Screen
+                name="EmailPage"
+                component={EmailPage}
                 options={({ navigation }) => ({
                     headerTitle: "",
                     headerLeft: () => (<HeaderLeft navigation={navigation} />)

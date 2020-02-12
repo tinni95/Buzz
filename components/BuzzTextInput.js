@@ -10,7 +10,7 @@ export default function BuzzTextInput(props) {
         <TextInput
             {...props}
             ref={props.reference}
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "white", fontSize: 18 }}
             selectionColor={Colors.primary}
             underlineColor={"white"}
             onFocus={() => setFocus(true)}
