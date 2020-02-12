@@ -36,7 +36,7 @@ export default function RegisterPage({ navigation }) {
             setSurnameError(false)
         }
         if (name.length > 0 && surname.length > 0) {
-            navigation.push("EmailPage")
+            navigation.push("EmailPage", { user: { name, surname } })
         }
     }
 

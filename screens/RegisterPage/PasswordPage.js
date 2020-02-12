@@ -3,14 +3,14 @@ import { View, StyleSheet } from 'react-native';
 import { isSmallDevice } from '../../constants/Layout';
 import BuzzTextInput from '../../components/BuzzTextInput';
 import HeaderRight from '../../components/HeaderRight';
-import { validateEmail } from "../../utils/validators"
+import { validatePassword } from "../../utils/validators"
 
-export default function EmailPage({ navigation, route }) {
+export default function PasswordPage({ navigation, route }) {
     const { user } = route.params;
-    const [email, setEmail] = useState("")
-    const [reEmail, setReEmail] = useState("")
-    const [emailError, setEmailError] = useState(false)
-    const [reEmailError, setReEmailError] = useState("")
+    const [password, setPassword] = useState("")
+    const [rePassword, setRePassword] = useState("")
+    const [passwordError, setPasswordError] = useState(false)
+    const [rePasswordError, setRePasswordError] = useState("")
 
     let preinput = useRef();
     let input = useRef();
@@ -26,20 +26,20 @@ export default function EmailPage({ navigation, route }) {
     })
 
     const login = () => {
-        if (!validateEmail(email)) {
-            setEmailError(true)
+        if (!validatePassword(password)) {
+            setPasswordError(true)
         }
         else {
-            setEmailError(false)
+            setPasswordError(false)
         }
-        if (email != reEmail) {
-            setReEmailError(true)
+        if (password != rePassword) {
+            setRePasswordError(true)
         }
         else {
-            setReEmailError(false)
+            setRePasswordError(false)
         }
-        if (validateEmail(email) && email == reEmail) {
-            navigation.push("PasswordPage", { user: { ...user, email } })
+        if (validatePassword(password) && password == rePassword) {
+            console.log(user)
         }
     }
 
@@ -47,24 +47,26 @@ export default function EmailPage({ navigation, route }) {
         <View style={styles.container}>
             <BuzzTextInput
                 reference={preinput}
-                label='Email'
+                label='Password'
+                secureTextEntry={true}
+                value={password}
                 autoCapitalize="none"
-                value={email}
-                hintError={emailError}
-                hintText={"Invalid email"}
-                placeholder={"email"}
-                onChangeText={text => setEmail(text)}
+                hintError={passwordError}
+                hintText={"Invalid password"}
+                placeholder={"password"}
+                onChangeText={text => setPassword(text)}
                 onSubmitEditing={() => input.current.focus()}
             />
             <BuzzTextInput
                 reference={input}
-                label='Repeat Email'
-                value={reEmail}
+                label='Repeat Password'
+                value={rePassword}
+                secureTextEntry={true}
                 autoCapitalize="none"
-                hintError={reEmailError}
-                hintText={"Email don't match"}
-                placeholder={"email"}
-                onChangeText={text => setReEmail(text)}
+                hintError={rePasswordError}
+                hintText={"Password do not match"}
+                placeholder={"password"}
+                onChangeText={text => setRePassword(text)}
                 onSubmitEditing={() => login()}
             />
         </View>
