@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { isSmallDevice } from '../../constants/Layout';
 import BuzzTextInput from '../../components/BuzzTextInput';
@@ -9,8 +9,13 @@ export default function RegisterPage({ navigation }) {
     const [surname, setSurname] = useState("")
     const [nameError, setNameError] = useState(false)
     const [surnameError, setSurnameError] = useState("")
-
+    let preinput = useRef();
     let input = useRef();
+
+    useEffect(() => {
+        preinput.current.focus()
+    }, [])
+
     navigation.setOptions({
         headerRight: () => (
             <HeaderRight text={"Next"} onPress={() => login()} />
@@ -38,6 +43,7 @@ export default function RegisterPage({ navigation }) {
     return (
         <View style={styles.container}>
             <BuzzTextInput
+                reference={preinput}
                 label='first name'
                 value={name}
                 hintError={nameError}

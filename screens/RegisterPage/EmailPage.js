@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { isSmallDevice } from '../../constants/Layout';
 import BuzzTextInput from '../../components/BuzzTextInput';
@@ -11,7 +11,13 @@ export default function EmailPage({ navigation }) {
     const [emailError, setEmailError] = useState(false)
     const [reEmailError, setReEmailError] = useState("")
 
+    let preinput = useRef();
     let input = useRef();
+
+    useEffect(() => {
+        preinput.current.focus()
+    }, [])
+
     navigation.setOptions({
         headerRight: () => (
             <HeaderRight text={"Next"} onPress={() => login()} />
@@ -36,6 +42,7 @@ export default function EmailPage({ navigation }) {
     return (
         <View style={styles.container}>
             <BuzzTextInput
+                reference={preinput}
                 label='Email'
                 autoCapitalize="none"
                 value={email}
