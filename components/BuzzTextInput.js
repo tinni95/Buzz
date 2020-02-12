@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput, HelperText } from 'react-native-paper';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { View } from 'react-native';
+import Colors from '../constants/Colors';
 
 export default function BuzzTextInput(props) {
+    const [focus, setFocus] = useState(false);
     return (<View>
         <TextInput
             {...props}
@@ -12,6 +13,9 @@ export default function BuzzTextInput(props) {
             style={{ backgroundColor: "white" }}
             selectionColor={Colors.primary}
             underlineColor={"white"}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            theme={{ colors: { placeholder: focus ? "grey" : Colors.primary } }}
         />
         <View style={{ marginTop: -2, backgroundColor: "white", borderTopColor: "white", borderTopWidth: 10 }} />
         {(props.hintError ? <HelperText
