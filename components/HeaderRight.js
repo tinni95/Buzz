@@ -5,7 +5,7 @@ import { Light } from "../components/StyledText"
 
 export default function HeaderRight({ onPress, text }) {
     return (
-        <TouchableOpacity onPress={onPress} style={{ paddingRight: 15 }}>
+        <TouchableOpacity onPress={onPress} style={{ paddingRight: 15, marginBottom: 2 }}>
             <Light style={{ fontSize: 15, color: Colors.secondary }}>{text}</Light>
         </TouchableOpacity>
     )

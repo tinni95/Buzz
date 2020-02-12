@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { isSmallDevice } from '../../constants/Layout';
 import BuzzTextInput from '../../components/BuzzTextInput';
 import HeaderRight from '../../components/HeaderRight';
 import { validatePassword } from "../../utils/validators"
+import { Ionicons } from "@expo/vector-icons";
 
 export default function PasswordPage({ navigation, route }) {
     const { user } = route.params;
@@ -11,7 +12,8 @@ export default function PasswordPage({ navigation, route }) {
     const [rePassword, setRePassword] = useState("")
     const [passwordError, setPasswordError] = useState(false)
     const [rePasswordError, setRePasswordError] = useState("")
-
+    const [passHidden, setPassHidden] = useState(true)
+    const [repassHidden, setRePassHidden] = useState(true)
     let preinput = useRef();
     let input = useRef();
 
@@ -45,35 +47,61 @@ export default function PasswordPage({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <BuzzTextInput
-                reference={preinput}
-                label='Password'
-                secureTextEntry={true}
-                value={password}
-                autoCapitalize="none"
-                hintError={passwordError}
-                hintText={"Invalid password"}
-                placeholder={"password"}
-                onChangeText={text => setPassword(text)}
-                onSubmitEditing={() => input.current.focus()}
-            />
-            <BuzzTextInput
-                reference={input}
-                label='Repeat Password'
-                value={rePassword}
-                secureTextEntry={true}
-                autoCapitalize="none"
-                hintError={rePasswordError}
-                hintText={"Password do not match"}
-                placeholder={"password"}
-                onChangeText={text => setRePassword(text)}
-                onSubmitEditing={() => login()}
-            />
+            <View >
+                <BuzzTextInput
+                    reference={preinput}
+                    label='Password'
+                    secureTextEntry={passHidden}
+                    value={password}
+                    autoCapitalize="none"
+                    hintError={passwordError}
+                    hintText={"Invalid password"}
+                    placeholder={"password"}
+                    onChangeText={text => setPassword(text)}
+                    onSubmitEditing={() => input.current.focus()}
+                />
+                <TouchableOpacity onPress={() => setPassHidden(!passHidden)} style={styles.wrapper}>
+                    <Ionicons
+                        name={"ios-eye"}
+                        size={25}
+                        style={{ padding: 5 }}
+                        color={"black"}
+                    />
+                </TouchableOpacity>
+            </View>
+            <View>
+                <BuzzTextInput
+                    reference={input}
+                    label='Repeat Password'
+                    value={rePassword}
+                    secureTextEntry={repassHidden}
+                    autoCapitalize="none"
+                    hintError={rePasswordError}
+                    hintText={"Password do not match"}
+                    placeholder={"password"}
+                    onChangeText={text => setRePassword(text)}
+                    onSubmitEditing={() => login()}
+                />
+                <TouchableOpacity onPress={() => setRePassHidden(!repassHidden)} style={styles.wrapper}>
+                    <Ionicons
+                        name={"ios-eye"}
+                        size={25}
+                        style={{ padding: 5 }}
+                        color={"black"}
+                    />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    wrapper: {
+        position: "absolute",
+        alignSelf: "center",
+        right: 25,
+        top: 15
+    },
     container: {
         flex: 1,
         backgroundColor: 'white',

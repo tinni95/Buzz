@@ -13,7 +13,7 @@ export default function HeaderLeft({ navigation }) {
                 style={{ marginLeft: 10 }}
                 color={Colors.primary}
             ></Ionicons>
-            <Light style={{ color: Colors.primary, marginLeft: 20, alignSelf: "center", fontSize: 17, marginBottom: 2 }}>Indietro</Light>
+            <Light style={{ color: Colors.primary, marginLeft: 20, alignSelf: "center", fontSize: 17 }}>Indietro</Light>
         </TouchableOpacity>
     )
 }

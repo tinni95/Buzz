@@ -16,7 +16,7 @@ export const AuthenticationStack = () => {
             <Stack.Screen
                 name="LandingPage"
                 component={LandingPage}
-                options={{ headerShown: false }}
+                options={{ headerShown: false, header: { borderBottomWidth: 0 } }}
             />
             <Stack.Screen
                 name="LoginPage"
@@ -31,6 +31,7 @@ export const AuthenticationStack = () => {
                 component={RegisterPage}
                 options={({ navigation }) => ({
                     headerTitle: "",
+                    headerStyle: { shadowColor: 'transparent' },
                     headerLeft: () => (<HeaderLeft navigation={navigation} />)
                 })}
             />
@@ -39,6 +40,7 @@ export const AuthenticationStack = () => {
                 component={EmailPage}
                 options={({ navigation }) => ({
                     headerTitle: "",
+                    headerStyle: { shadowColor: 'transparent' },
                     headerLeft: () => (<HeaderLeft navigation={navigation} />)
                 })}
             />
@@ -47,6 +49,7 @@ export const AuthenticationStack = () => {
                 component={PasswordPage}
                 options={({ navigation }) => ({
                     headerTitle: "",
+                    headerStyle: { shadowColor: 'transparent' },
                     headerLeft: () => (<HeaderLeft navigation={navigation} />)
                 })}
             />
